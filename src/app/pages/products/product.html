@@ -1,10 +1,20 @@
-<h1 class="text-5xl font-bold my-4">Product Items</h1>
-@if(!isLoading()){
-<mat-selection-list #products>
-  @for (product of productList(); track $index) {
-  <mat-list-item (click)="handelProductCLick(product)">{{ product.title }}</mat-list-item>
+@if (!isLoading()) {
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+  @for (product of productList(); track product.id) {
+  <mat-card class="overflow-hidden" (click)="handelProductCLick(product)">
+    <div class="flex items-start gap-4">
+      <img
+        [src]="product.thumbnail || 'assets/placeholder.png'"
+        [alt]="product.title"
+        class="w-24 h-24 object-cover rounded"
+      />
+      <div class="flex-1">
+        <mat-card-title>{{ product.title }}</mat-card-title>
+        <mat-card-subtitle> Price: {{ product.price }} </mat-card-subtitle>
+        <mat-card-subtitle> Stock: {{ product.stock }} </mat-card-subtitle>
+      </div>
+    </div>
+  </mat-card>
   }
-</mat-selection-list>
-} @else {
-<div><mat-spinner></mat-spinner></div>
-}
+</div>
+} @else{ }

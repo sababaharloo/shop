@@ -3,13 +3,24 @@ import { ProductService } from '../../services/porducts';
 import { Product, ProductResponse } from '../../types/product.interfaace';
 import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule, MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'porducts',
   templateUrl: './product.html',
   providers: [ProductService, MatProgressSpinnerModule],
-  imports: [MatListModule, MatProgressSpinner],
+  imports: [
+    MatListModule,
+    MatProgressSpinner,
+    MatCardModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    MatIconModule,
+  ],
 })
 export class ProductComponent implements OnInit {
   productList = signal<Product[]>([]);
@@ -19,7 +30,6 @@ export class ProductComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    debugger;
     this.isLoading.set(true);
     this.productService.getProductList().subscribe({
       next: (value: ProductResponse) => {
