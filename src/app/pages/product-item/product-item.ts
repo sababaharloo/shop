@@ -4,13 +4,13 @@ import { ProductDetail } from '../../types/product.interfaace';
 import { ActivatedRoute } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'product-item',
   templateUrl: './product-item.html',
   providers: [ProductService],
-  imports:[MatCardModule,MatChipsModule,MatProgressBarModule]
+  imports: [MatCardModule, MatChipsModule, MatProgressBarModule],
 })
 export class ProductItemComponent implements OnInit {
   product = signal<ProductDetail>({});
