@@ -1,4 +1,4 @@
-import { Component, inject, model, OnInit, signal } from '@angular/core';
+import { booleanAttribute, Component, inject, input, model, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { ProductService } from '../../services/porducts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +14,7 @@ export class MasterLayoutComponent implements OnInit {
   productService = inject(ProductService);
   route = inject(Router);
   searchText = model<string>('');
+  isLoading = model<boolean>(true);
 
   productCategories = signal<string[]>([]);
   constructor() {}
@@ -26,6 +27,7 @@ export class MasterLayoutComponent implements OnInit {
         });
       },
     });
+    this.isLoading.set(false);
   }
   handelCategorySelection(category: string) {
     this.route.navigate([`products/category/`, category]);

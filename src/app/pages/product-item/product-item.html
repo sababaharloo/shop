@@ -1,15 +1,45 @@
-<mat-card class="" appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{ product().title }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>some text</p>
-  </mat-card-content>
-  <mat-card-footer class="example-card-footer">
-    <mat-chip-set aria-label="Chihuahua traits">
-      <mat-chip>charming</mat-chip>
-      <mat-chip>graceful</mat-chip>
-      <mat-chip>sassy</mat-chip>
-    </mat-chip-set>
-  </mat-card-footer>
-</mat-card>
+<div class="flex items-start gap-6 p-4">
+  <div class="flex flex-col items-center">
+    <div class="flex-shrink-0 mb-4">
+      <img [src]="selectedImage" [alt]="productInfo().title"
+        class="w-100 h-100 object-cover bg-gray-200 rounded-xl shadow-md transition-all duration-300" />
+    </div>
+    <div class="flex gap-2 overflow-x-auto max-w-xs pb-2">
+      @for (img of productInfo().images; track $index) {
+      <img [src]="img" (click)="selectedImage = img" [class.ring]="selectedImage === img"
+        [class.ring-blue-500]="selectedImage === img"
+        class="w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-all duration-200" />
+      }
+    </div>
+  </div>
+  <div class="flex flex-col justify-between">
+    <h2 class="text-2xl font-semibold mb-2">
+      {{ productInfo().title }}
+    </h2>
+    <p class="text-gray-600 mb-4">
+      {{ productInfo().description }}
+    </p>
+    <div class="flex items-center gap-4">
+      <span class="text-lg font-bold text-green-600">
+        ${{ productInfo().price }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="mt-8 border-t pt-6 px-4">
+  <h3 class="text-xl font-semibold mb-4">Customer Reviews</h3>
+
+  <!-- Single Review -->
+  @for (review of productInfo().reviews; track $index) {
+  <div class="border-b last:border-none pb-4 mb-4">
+    <div class="flex items-center justify-between mb-2">
+      <span class="font-medium text-gray-800">{{ review.reviewerName}}</span>
+      <span class="text-yellow-500 text-sm">
+        ⭐ {{ review.rating }}/5
+      </span>
+    </div>
+    <p class="text-gray-600">{{ review.comment }}</p>
+  </div>
+  }
+</div>

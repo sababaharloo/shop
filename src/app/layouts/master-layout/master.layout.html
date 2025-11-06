@@ -14,7 +14,7 @@
     </div>
   </header>
 
-
+  @if (!isLoading()) {
   <div class="flex flex-1 pt-[50px]">
     <aside class="w-60 border-e border-gray-300 h-[calc(100vh-100px)] sticky top-[60px] overflow-y-auto p-4 bg-white">
       <h1 class="font-semibold mb-2">Categories</h1>
@@ -31,7 +31,12 @@
       <router-outlet />
     </main>
   </div>
-  <footer class="p-4 text-gray-800 text-center border-t border-gray-300">
+  }@else {
+  <div class="bg-gray-200">
+    <span class="bg-gray-200 h-200"></span>
+  </div>
+  }
+  <footer class="p-1 text-gray-800 text-center border-t border-gray-300">
     <p>All rights reserved.</p>
   </footer>
 </div>

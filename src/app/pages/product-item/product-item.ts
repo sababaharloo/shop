@@ -13,7 +13,8 @@ import { MatCardModule } from '@angular/material/card';
   imports: [MatCardModule, MatChipsModule, MatProgressBarModule],
 })
 export class ProductItemComponent implements OnInit {
-  product = signal<ProductDetail>({});
+  selectedImage: string = '';
+  productInfo = signal<ProductDetail>({});
   activeRoute = inject(ActivatedRoute);
   productService = inject(ProductService);
 
@@ -23,7 +24,8 @@ export class ProductItemComponent implements OnInit {
     this.activeRoute.params.subscribe((p: any) => {
       this.productService.getProductDetail(p.id).subscribe({
         next: (productdetail) => {
-          this.product.set(productdetail);
+          this.productInfo.set(productdetail);
+          this.selectedImage = productdetail?.thumbnail ?? '';
         },
       });
     });
