@@ -32,6 +32,7 @@ export interface ProductDetail {
   returnPolicy?: string;
   thumbnail?: string;
   images?: string[];
+  tags?: string[];
 }
 
 export interface ProductReview {

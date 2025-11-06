@@ -3,8 +3,8 @@ import { ProductService } from '../../services/porducts';
 import { ProductDetail } from '../../types/product.interfaace';
 import { ActivatedRoute } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'product-item',

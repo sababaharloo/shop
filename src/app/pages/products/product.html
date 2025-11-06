@@ -1,20 +1,38 @@
 @if (!isLoading()) {
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+<div class="grid grid-cols-1 gap-4">
   @for (product of productList(); track product.id) {
-  <mat-card class="overflow-hidden" (click)="handelProductCLick(product)">
-    <div class="flex items-start gap-4">
-      <img
-        [src]="product.thumbnail || 'assets/placeholder.png'"
-        [alt]="product.title"
-        class="w-24 h-24 object-cover rounded"
-      />
-      <div class="flex-1">
-        <mat-card-title>{{ product.title }}</mat-card-title>
-        <mat-card-subtitle> Price: {{ product.price }} </mat-card-subtitle>
-        <mat-card-subtitle> Stock: {{ product.stock }} </mat-card-subtitle>
-      </div>
+  <div (click)="handelProductCLick(product)"
+    class="cursor-pointer flex items-center hover:shadow-md transition-shadow border-b border-gray-400">
+    <div class="p-3">
+      <img [src]="product.thumbnail" [alt]="product.title" class="w-40 h-40 bg-gray-200 p-2" />
     </div>
-  </mat-card>
+    <div class="ml-4">
+      <div>
+        <p class="font-semibold">{{ product.title }}</p>
+      </div>
+      <div class="flex justify-start items-center gap-1">
+        @if (product.discountPercentage) {
+        <span class="line-through text-lg text-gray-500 mb2">
+          ${{(product?.price ?? 0) + ((product?.price ?? 0 *(product?.discountPercentage ?? 1)))}}
+        </span>
+        }
+        <span class="text-lg mb2">${{product.price}}</span>
+      </div>
+      <div class="flex items-center text-yellow-400 mb-2">
+        <mat-icon>star</mat-icon>
+        <span class="text-black">{{product.rating}}</span>
+      </div>
+      <div class="flex justify-start gap-1">
+        @for (
+        tag of product.tags; track $index) {
+        <span class="bg-gray-200 px-2  rounded-lg text-center">{{tag}}</span>
+        }
+      </div>
+
+    </div>
+  </div>
   }
 </div>
-} @else{ }
+}
+@else{
+}
